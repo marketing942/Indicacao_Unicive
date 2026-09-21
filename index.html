@@ -1,0 +1,764 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+
+  <!-- Google Tag Manager -->
+  <script>(function(w,d,s,l){w[l]=w[l]||[];w[l].push({'gtm.start':
+  new Date().getTime(),event:'gtm.js'});var f=d.getElementsByTagName(s)[0],
+  j=d.createElement(s),dl=l!='dataLayer'?'?l='+l:'';j.async=true;j.src=
+  'https://sgtm.cppem.com.br/metrics/'+dl;f.parentNode.insertBefore(j,f);})
+  (window,document,'script','dataLayer');</script>
+  <!-- End Google Tag Manager -->
+
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+
+  <title>Missão Indicação | UniCive Caruaru</title>
+  <meta name="description" content="Indique alguém para a UniCive Caruaru. Quem você indicar faz a matrícula por R$ 99,90. Você recebe no Pix a cada matrícula confirmada. Graduação EAD reconhecida pelo MEC." />
+  <meta property="og:title" content="Missão Indicação | UniCive Caruaru" />
+  <meta property="og:description" content="Seu amigo faz a matrícula por R$ 99,90. Você recebe no Pix a cada matrícula confirmada." />
+  <meta property="og:type" content="website" />
+  <meta name="theme-color" content="#006652" />
+
+  <link rel="icon" type="image/png" href="public/logo-unicive.png" />
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link href="https://fonts.googleapis.com/css2?family=Bebas+Neue&family=Montserrat:wght@400;500;600;700;800&display=swap" rel="stylesheet" />
+
+  <style>
+    /* =========================================================
+       Tokens da UniCive.
+
+       Verde e âmbar saem do próprio logo, amostrados do PNG, não do CSS da
+       captura-unicive: lá o verde era #4f7129 (oliva), que não é a cor da
+       marca.
+
+       Esta é a única das três páginas com fundo CLARO. Não basta trocar as
+       cores: os textos, as bordas e todos os degradês dos cartões precisam
+       ser invertidos, e a faísca dos níveis não pode usar mix-blend-mode
+       screen, que sobre claro não aparece.
+       ========================================================= */
+    :root{
+      --green:#006652; --green-dark:#00493B; --green-light:#0E8268; --green-pale:#E4F0EC;
+      --amber:#E3A11B; --amber-light:#FFC571; --amber-pale:#FFF1DC;
+
+      --bg:#F2F4EC; --bg-alt:#E9EDE1; --surface:#FFFFFF; --surface-2:#FAFBF6;
+      --text:#12241E; --text-soft:#46584F; --text-muted:#77877E;
+      --border:rgba(0,102,82,.16); --border-active:rgba(0,102,82,.42);
+      --danger:#C0392B; --ok:#0E8268; --whats:#168c43;
+      --sombra:0 18px 44px rgba(18,36,30,.1);
+      --max-width:1180px;
+
+      --font-display:'Bebas Neue'; --font-ui:'Montserrat'; --font-body:'Montserrat';
+
+      /* Cor de cada nível. Escurecidas em relação às outras duas páginas:
+         sobre fundo claro, bronze e prata claros somem. */
+      --bronze:#A2622F; --bronze-luz:#C98449;
+      --prata:#7D8894;  --prata-luz:#A9B4BF;
+      --ouro:#C08A12;   --ouro-luz:#E3A11B;
+    }
+
+    *{box-sizing:border-box;margin:0;padding:0}
+    html{scroll-behavior:smooth;background:var(--bg)}
+    body{
+      background:
+        radial-gradient(ellipse 80% 50% at 85% 0%,rgba(227,161,27,.14),transparent 70%),
+        radial-gradient(ellipse 70% 55% at 0% 70%,rgba(0,102,82,.09),transparent 70%),
+        var(--bg);
+      color:var(--text);
+      font-family:var(--font-body),system-ui,-apple-system,Segoe UI,Roboto,sans-serif;
+      line-height:1.7;
+      overflow-x:hidden;
+    }
+
+    ::selection{background:var(--green);color:#fff}
+    a{color:inherit;text-decoration:none}
+    button,input,select{font:inherit;color:inherit}
+    img{display:block;max-width:100%}
+
+    /* SVG é inline por padrão, e o espaço da linha de base empurra os ícones
+       para cima dentro dos quadradinhos. Isto resolve na raiz, para todos. */
+    svg{display:block;flex:0 0 auto}
+
+    .container{width:min(calc(100% - 2rem),var(--max-width));margin-inline:auto}
+    .sr-only{position:absolute!important;width:1px!important;height:1px!important;padding:0!important;margin:-1px!important;overflow:hidden!important;clip:rect(0,0,0,0)!important;white-space:nowrap!important;border:0!important}
+
+    .eyebrow{display:flex;align-items:center;gap:.7rem;color:var(--green);font:700 .74rem/1 var(--font-ui);letter-spacing:.16em;text-transform:uppercase}
+    .hero .eyebrow{color:var(--amber-light)}
+    .eyebrow::before{content:"";width:26px;height:2px;background:var(--amber);flex:0 0 auto;border-radius:2px}
+
+    .section{position:relative;padding:clamp(3rem,7vw,5rem) 0}
+    /* Header fixo: sem isto, todo link de âncora para com o título da seção
+       escondido atrás dele. */
+    section[id]{scroll-margin-top:84px}
+    .section-alt{background:var(--bg-alt);border-block:1px solid var(--border)}
+    .section-title{margin:.9rem 0 0;font:400 clamp(2rem,4.6vw,3.1rem)/1.02 var(--font-display);letter-spacing:.012em;text-transform:uppercase;color:var(--green-dark)}
+    .section-title .amber{color:var(--amber)}
+    .section-copy{margin:1rem 0 0;max-width:62ch;color:var(--text-soft);font-size:1rem;line-height:1.8}
+
+    /* ---------- Botões ---------- */
+    .btn{min-height:50px;display:inline-flex;align-items:center;justify-content:center;gap:.6rem;padding:.8rem 1.4rem;border:0;border-radius:.6rem;font:700 .82rem/1 var(--font-ui);letter-spacing:.06em;text-transform:uppercase;cursor:pointer;transition:transform .2s ease,background .2s ease,border-color .2s ease,opacity .2s ease}
+    .btn--amber{color:#3A2600;background:linear-gradient(150deg,var(--amber-light),var(--amber));box-shadow:0 12px 28px rgba(227,161,27,.32)}
+    .btn--green{color:#fff;background:var(--green)}
+    .btn--ghost{color:var(--green-dark);border:1.5px solid var(--border-active);background:rgba(255,255,255,.7)}
+    .btn--whats{color:#fff;background:var(--whats)}
+    .btn:hover{transform:translateY(-2px)}
+    .btn:disabled{opacity:.55;cursor:not-allowed;transform:none}
+    .btn:focus-visible,a:focus-visible,input:focus-visible{outline:2px solid var(--green);outline-offset:3px}
+
+    /* ---------- Header ---------- */
+    .site-header{position:sticky;z-index:50;top:0;border-bottom:1px solid var(--border);background:rgba(242,244,236,.92);backdrop-filter:blur(16px)}
+    .site-header-inner{height:68px;display:flex;align-items:center;gap:.9rem}
+    .site-header img{height:34px;width:auto;object-fit:contain}
+    .header-tag{color:var(--green);font:700 .68rem/1 var(--font-ui);letter-spacing:.16em;text-transform:uppercase;padding-left:.9rem;border-left:1px solid var(--border)}
+    .header-cta{margin-left:auto}
+    .header-cta .btn{min-height:40px;padding:.55rem 1rem;font-size:.7rem}
+
+    /* =========================================================
+       HERO — copy à esquerda, formulário à direita.
+       O formulário fica na primeira dobra de propósito: indicar é um gesto
+       de impulso, e cada rolagem entre a promessa e o campo é gente perdida.
+       ========================================================= */
+    .hero{position:relative;isolation:isolate;padding:clamp(2rem,5vw,3.25rem) 0 clamp(2.5rem,5vw,3.5rem)}
+
+    /* Banner do hero: o mesmo arquivo do captura-unicive, para as duas
+       páginas da UniCive abrirem com a mesma cara.
+
+       A arte já traz o símbolo da marca à esquerda, então a marca d'água que
+       existia aqui saiu: seriam dois logos no mesmo lugar.
+
+       O véu verde por cima escurece o lado esquerdo, onde mora o texto, e vai
+       ficando transparente à direita para a ilustração aparecer atrás do
+       formulário. É o que permite texto branco sobre um fundo que, sozinho,
+       é claro demais no centro. */
+    .hero{
+      background:
+        linear-gradient(90deg,rgba(0,53,43,.9) 0%,rgba(0,63,51,.74) 38%,rgba(0,73,59,.34) 64%,rgba(0,73,59,.1) 100%),
+        url('public/background1.webp') center/cover no-repeat;
+      border-bottom:1px solid var(--border);
+    }
+
+    .hero-grid{display:grid;grid-template-columns:minmax(0,1fr) minmax(0,460px);gap:clamp(2rem,4.5vw,3.5rem);align-items:start}
+    .hero-copy{align-self:center}
+    .hero h1{margin:1.1rem 0 0;font:400 clamp(2.4rem,6vw,4.1rem)/.95 var(--font-display);letter-spacing:.01em;text-transform:uppercase;color:#fff;text-shadow:0 2px 18px rgba(0,40,32,.45)}
+    .hero h1 .amber{color:var(--amber)}
+    .hero p.lead{margin:1.25rem 0 0;max-width:46ch;color:#DDE8E2;font-size:clamp(1rem,2.2vw,1.06rem);line-height:1.8}
+    .hero-proof{display:flex;flex-wrap:wrap;gap:.5rem;margin-top:1.6rem}
+    .chip{display:inline-flex;align-items:center;gap:.45rem;padding:.48rem .85rem;border:1px solid rgba(255,255,255,.28);border-radius:999px;background:rgba(255,255,255,.12);color:#fff;font:600 .72rem/1 var(--font-ui);letter-spacing:.03em;backdrop-filter:blur(6px)}
+    .chip svg{color:var(--amber)}
+    .hero-link{display:inline-flex;align-items:center;gap:.45rem;margin-top:1.5rem;color:var(--amber-light);font:700 .76rem var(--font-ui);letter-spacing:.06em;text-transform:uppercase;border-bottom:2px solid var(--amber);padding-bottom:.25rem}
+    .hero-link svg{transition:transform .2s ease}
+    .hero-link:hover svg{transform:translateY(3px)}
+
+    /* =========================================================
+       Formulário
+       ========================================================= */
+    .form-card{position:relative;padding:clamp(1.4rem,3vw,1.9rem);border:1px solid var(--border);border-radius:1rem;background:var(--surface);box-shadow:var(--sombra)}
+    /* Fita superior nas cores da marca, no lugar da borda luminosa que as
+       páginas escuras usam: sobre branco, brilho não se vê. */
+    .form-card::before{content:"";position:absolute;top:0;right:0;left:0;height:5px;border-radius:1rem 1rem 0 0;background:linear-gradient(90deg,var(--green),var(--amber))}
+    .form-titulo{margin-bottom:1.15rem}
+    .form-titulo strong{display:block;font:400 1.6rem/1.05 var(--font-display);letter-spacing:.02em;text-transform:uppercase;color:var(--green-dark)}
+    .form-titulo span{display:block;margin-top:.4rem;color:var(--text-muted);font-size:.83rem;line-height:1.6}
+
+    fieldset{border:0;padding:0;margin:0;min-width:0}
+    fieldset+fieldset{margin-top:1.2rem;padding-top:1.1rem;border-top:1px solid var(--border)}
+    legend{display:flex;align-items:center;gap:.55rem;margin-bottom:.85rem;color:var(--green);font:700 .7rem/1 var(--font-ui);letter-spacing:.14em;text-transform:uppercase}
+    legend b{display:grid;width:22px;height:22px;place-items:center;border-radius:50%;background:var(--green);color:#fff;font:700 .68rem/1 var(--font-ui)}
+
+    .campo{display:grid;gap:.35rem}
+    /* O [hidden] do navegador perde para a regra de classe acima. */
+    .campo[hidden]{display:none}
+    .campo+.campo{margin-top:.8rem}
+    .campo label{color:var(--green-dark);font:600 .74rem/1.3 var(--font-ui);letter-spacing:.05em;text-transform:uppercase}
+    .campo input{width:100%;min-height:46px;padding:.7rem .9rem;border:1.5px solid var(--border);border-radius:.55rem;background:var(--surface-2);color:var(--text);font-size:1rem;transition:border-color .18s ease,background .18s ease}
+    .campo input::placeholder{color:#9AA79F}
+    .campo input:focus{border-color:var(--green);background:#fff;outline:none}
+    .campo input.is-invalid{border-color:var(--danger)}
+    .campo .ajuda{color:var(--text-muted);font-size:.74rem;line-height:1.5}
+    .campo .erro{color:var(--danger);font-size:.77rem;line-height:1.4}
+    .campo .erro:empty{display:none}
+    .pix-tipo{color:var(--ok);font-size:.74rem;font-weight:700}
+    .pix-tipo:empty{display:none}
+
+    .form-rodape{margin-top:1.2rem}
+    .form-rodape .btn{width:100%}
+    .form-aviso{margin-top:.8rem;color:var(--text-muted);font-size:.73rem;line-height:1.6;text-align:center}
+
+    /* ---------- Sucesso ---------- */
+    .sucesso{display:none;padding:clamp(1rem,2vw,1.5rem) 0;text-align:center}
+    .sucesso[data-ativo="true"]{display:block}
+    .form-card[data-enviado="true"] .form-conteudo{display:none}
+    .sucesso-icone{display:grid;width:62px;height:62px;margin:0 auto;place-items:center;border-radius:50%;color:#fff;background:var(--green)}
+    .sucesso h3{margin:1.1rem 0 0;font:400 1.8rem/1.05 var(--font-display);letter-spacing:.02em;text-transform:uppercase;color:var(--green-dark)}
+    .sucesso p{margin:.7rem auto 0;max-width:38ch;color:var(--text-soft);font-size:.9rem}
+    .sucesso-placar{display:inline-flex;align-items:center;gap:.5rem;margin-top:1.1rem;padding:.5rem .9rem;border-radius:999px;background:var(--amber-pale);color:#7A5200;font:700 .74rem/1 var(--font-ui);letter-spacing:.06em;text-transform:uppercase}
+    .sucesso-placar[hidden]{display:none}
+    .sucesso-acoes{display:grid;gap:.7rem;margin-top:1.5rem}
+
+    /* =========================================================
+       COMO PARTICIPAR — quatro passos
+       ========================================================= */
+    .passos{display:grid;grid-template-columns:repeat(4,minmax(0,1fr));gap:1rem;margin-top:2.25rem;list-style:none}
+    .passo{position:relative;display:flex;flex-direction:column;gap:.9rem;padding:1.6rem 1.3rem;border:1px solid var(--border);border-radius:.8rem;background:var(--surface);box-shadow:var(--sombra)}
+    .passo::after{content:"";position:absolute;top:0;left:1.3rem;width:44px;height:3px;border-radius:0 0 3px 3px;background:var(--amber)}
+    .passo-num{display:grid;width:42px;height:42px;place-items:center;border-radius:50%;background:var(--green-pale);color:var(--green);font:400 1.4rem/1 var(--font-display)}
+    .passo strong{display:block;font:700 .84rem/1.3 var(--font-ui);letter-spacing:.04em;text-transform:uppercase;color:var(--green-dark)}
+    .passo p{margin-top:.5rem;color:var(--text-soft);font-size:.86rem;line-height:1.65}
+
+    /* =========================================================
+       NÍVEIS — entram caindo e batendo no chão
+       ========================================================= */
+    .niveis{display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:1rem;margin-top:2.5rem;perspective:1200px}
+
+    .nivel{
+      position:relative;display:flex;flex-direction:column;overflow:hidden;
+      padding:1.7rem 1.4rem;border:1px solid var(--border);border-radius:.85rem;
+      background:var(--surface);box-shadow:var(--sombra);
+      transition:transform .25s ease,border-color .25s ease,box-shadow .25s ease;
+      opacity:0;
+    }
+    .nivel::before{content:"";position:absolute;top:0;left:0;z-index:2;width:100%;height:4px;background:var(--cor)}
+    /* Sobre fundo claro a faísca é um brilho BRANCO, sem mix-blend-mode:
+       "screen" clareia, e sobre um cartão branco não sobra nada para ver. */
+    .nivel::after{
+      content:"";position:absolute;inset:0;z-index:1;pointer-events:none;
+      opacity:0;transform:translateX(-130%);
+      background:linear-gradient(105deg,transparent 38%,rgba(255,255,255,.92) 48%,transparent 58%);
+    }
+
+    .nivel[data-visivel="true"]{animation:nivel-cair .9s cubic-bezier(.22,.9,.3,1) var(--atraso,0s) forwards}
+
+    /* Pousado: o estado final, já sem animação no card. É o que devolve o
+       :hover. Uma animação com fill-mode "forwards" congela o transform e
+       deixaria o hover sem efeito pelo resto da página. */
+    .nivel[data-pousado="true"]{opacity:1}
+    .nivel[data-pousado="true"]::before{animation:nivel-impacto .55s ease-out forwards}
+    .nivel[data-pousado="true"]::after{animation:nivel-faisca .9s ease-out .06s forwards}
+    .nivel[data-pousado="true"]:hover{transform:translateY(-4px);border-color:var(--cor);box-shadow:0 20px 42px -16px var(--cor)}
+
+    @keyframes nivel-cair{
+      0%   {opacity:0;transform:translate3d(0,-160px,0) rotateX(24deg) scale(.97)}
+      45%  {opacity:1}
+      62%  {transform:translate3d(0,0,0) rotateX(0deg) scale(1.035,.9)}    /* bateu no chão */
+      74%  {transform:translate3d(0,-14px,0) scale(.99,1.03)}              /* quicou */
+      88%  {transform:translate3d(0,0,0) scale(1.012,.985)}
+      100% {opacity:1;transform:translate3d(0,0,0) scale(1)}
+    }
+    @keyframes nivel-impacto{
+      0%   {box-shadow:0 0 22px 4px var(--cor)}
+      100% {box-shadow:0 0 0 0 rgba(0,0,0,0)}
+    }
+    @keyframes nivel-faisca{
+      0%   {opacity:0;transform:translateX(-130%)}
+      20%  {opacity:.8}
+      100% {opacity:0;transform:translateX(130%)}
+    }
+
+    .nivel-topo{display:flex;align-items:center;justify-content:space-between;gap:.75rem;flex-wrap:wrap}
+    .nivel-nome{color:var(--cor);font:400 1.9rem/1 var(--font-display);letter-spacing:.03em;text-transform:uppercase}
+    .nivel-meta{padding:.3rem .55rem;border:1px solid var(--border);border-radius:999px;color:var(--text-muted);font:600 .62rem/1 var(--font-ui);letter-spacing:.04em;white-space:nowrap}
+    .nivel-valor{margin-top:1.1rem;font:400 2.9rem/1 var(--font-display);letter-spacing:.01em;color:var(--green-dark)}
+    .nivel-valor small{display:block;margin-top:.5rem;color:var(--text-muted);font:600 .74rem/1.4 var(--font-ui);letter-spacing:.02em}
+
+    /* =========================================================
+       Selo do indicado — o anel carrega enquanto o número sobe
+       ========================================================= */
+    .indicado-faixa{display:grid;grid-template-columns:minmax(0,1fr) auto;align-items:center;gap:clamp(1.5rem,4vw,2.5rem);margin-top:1.5rem;padding:clamp(1.4rem,3vw,2rem);border:1px solid var(--border);border-radius:.85rem;background:linear-gradient(120deg,var(--green-pale),var(--surface) 65%);box-shadow:var(--sombra)}
+    .indicado-faixa small{color:var(--green);font:700 .66rem/1 var(--font-ui);letter-spacing:.14em;text-transform:uppercase}
+    .indicado-faixa strong.titulo{display:block;margin-top:.5rem;font:400 clamp(1.6rem,3vw,2.1rem)/1.05 var(--font-display);letter-spacing:.02em;text-transform:uppercase;color:var(--green-dark)}
+
+    .precos{display:grid;gap:.6rem;margin-top:1rem;max-width:48ch}
+    .preco{display:flex;flex-wrap:wrap;align-items:baseline;gap:.5rem;padding:.6rem .85rem;border:1px solid var(--border);border-radius:.55rem;background:var(--surface)}
+    .preco b{font:700 .72rem/1 var(--font-ui);letter-spacing:.08em;text-transform:uppercase;color:var(--text-muted);flex:0 0 100%}
+    .preco s{color:var(--text-muted);font-size:.92rem}
+    .preco i{font-style:normal;font:700 1.15rem/1 var(--font-ui);color:var(--green-dark)}
+    .preco em{font-style:normal;margin-left:auto;padding:.2rem .5rem;border-radius:999px;background:var(--amber-pale);color:#7A5200;font:700 .68rem/1.4 var(--font-ui)}
+
+    .selo{
+      position:relative;display:grid;place-items:center;flex:0 0 auto;
+      width:142px;height:142px;border-radius:50%;
+      /* --p vai de 0 a 100 e é escrito pelo script a cada quadro */
+      background:conic-gradient(var(--amber) calc(var(--p,0) * 1%),rgba(0,102,82,.12) 0);
+    }
+    .selo::before{content:"";position:absolute;inset:8px;border-radius:50%;background:var(--surface)}
+    .selo-num,.selo-off{position:relative;z-index:1}
+    /* nowrap + line-height 1: sem isso o número quebra longe do símbolo */
+    .selo-num{display:block;color:var(--green-dark);font:400 2.6rem/1 var(--font-display);white-space:nowrap}
+    .selo-off{display:block;max-width:92px;margin:.2rem auto 0;color:var(--text-muted);font:700 .52rem/1.25 var(--font-ui);letter-spacing:.08em;text-transform:uppercase;text-align:center}
+
+    /* ---------- O que você está indicando ---------- */
+    .cursos{display:grid;grid-template-columns:repeat(4,minmax(0,1fr));gap:.7rem;margin-top:2rem}
+    .curso{display:flex;align-items:center;gap:.6rem;padding:.9rem 1rem;border:1px solid var(--border);border-radius:.6rem;background:var(--surface);color:var(--green-dark);font:600 .84rem/1.3 var(--font-ui);transition:border-color .2s ease,transform .2s ease}
+    .curso:hover{border-color:var(--border-active);transform:translateY(-2px)}
+    .curso svg{color:var(--amber)}
+
+    /* =========================================================
+       CARROSSEL INFINITO
+
+       Duas cópias da mesma fita, lado a lado, e a animação arrasta o conjunto
+       para a esquerda. Quando a primeira cópia acaba de sair, a segunda está
+       exatamente onde a primeira começou, então o salto de volta ao início
+       não se vê.
+
+       O deslocamento é `-50% - metade do gap`, não `-50%` puro: com duas
+       cópias separadas por um gap, metade da largura total cai no meio desse
+       espaço, e a emenda daria um solavanco a cada volta.
+
+       A segunda cópia é aria-hidden: para um leitor de tela ela seria a mesma
+       lista lida duas vezes.
+       ========================================================= */
+    .carrossel{
+      --gap:.8rem;
+      position:relative;overflow:hidden;margin-top:2.25rem;
+      /* as pontas somem em vez de serem cortadas na faca */
+      -webkit-mask-image:linear-gradient(90deg,transparent,#000 5%,#000 95%,transparent);
+      mask-image:linear-gradient(90deg,transparent,#000 5%,#000 95%,transparent);
+    }
+    .carrossel-fita{display:flex;gap:var(--gap);width:max-content;animation:rolar var(--duracao,48s) linear infinite}
+    .carrossel:hover .carrossel-fita,.carrossel:focus-within .carrossel-fita{animation-play-state:paused}
+    .carrossel-grupo{display:flex;gap:var(--gap);margin:0;padding:0;list-style:none}
+
+    @keyframes rolar{
+      from{transform:translateX(0)}
+      to{transform:translateX(calc(-50% - var(--gap) / 2))}
+    }
+
+    .carrossel figure{
+      position:relative;flex:0 0 auto;margin:0;overflow:hidden;
+      width:clamp(160px,17vw,210px);
+      border:1px solid var(--border);border-radius:.7rem;background:var(--surface-2);
+    }
+    .carrossel img{width:100%;height:100%;aspect-ratio:3/4;object-fit:cover;display:block}
+
+    /* Quem pediu menos movimento rola a fita com o dedo ou o trackpad, e a
+       cópia duplicada sai de cena para não repetir o conteúdo. */
+    @media (prefers-reduced-motion:reduce){
+      .carrossel{overflow-x:auto;-webkit-mask-image:none;mask-image:none;scroll-snap-type:x mandatory}
+      .carrossel figure{scroll-snap-align:center}
+      .carrossel-grupo[aria-hidden="true"]{display:none}
+    }
+    .carrossel{margin-top:1.5rem}
+
+    .cursos-rodape{display:flex;flex-wrap:wrap;align-items:center;gap:1rem;margin-top:1.5rem;padding-top:1.35rem;border-top:1px solid var(--border)}
+    .cursos-rodape p{flex:1 1 320px;margin:0;color:var(--text-soft);font-size:.88rem;line-height:1.7}
+    .cursos-rodape p b{color:var(--green-dark)}
+
+    /* ---------- Regras ---------- */
+    .regras{display:grid;grid-template-columns:repeat(auto-fit,minmax(270px,1fr));gap:1rem;margin-top:2rem}
+    .regra{display:grid;grid-template-columns:20px minmax(0,1fr);gap:.85rem;padding:1.2rem;border:1px solid var(--border);border-radius:.6rem;background:var(--surface)}
+    .regra>svg{margin-top:.3rem;color:var(--green)}
+    .regra strong{display:block;font:700 .8rem/1.35 var(--font-ui);letter-spacing:.03em;text-transform:uppercase;color:var(--green-dark)}
+    .regra p{margin-top:.4rem;color:var(--text-soft);font-size:.84rem;line-height:1.65}
+
+    /* ---------- Footer ---------- */
+    .site-footer{padding:2.5rem 0;border-top:1px solid var(--border);background:var(--bg-alt)}
+    .site-footer-inner{display:flex;flex-wrap:wrap;align-items:center;gap:1rem}
+    .site-footer img{height:30px;width:auto;opacity:.9}
+    .site-footer p{color:var(--text-muted);font-size:.78rem;line-height:1.7}
+    .site-footer a{color:var(--green);font-weight:700}
+
+    /* ---------- Responsivo ---------- */
+    @media (max-width:1080px){
+      .passos{grid-template-columns:repeat(2,minmax(0,1fr))}
+      .cursos{grid-template-columns:repeat(3,minmax(0,1fr))}
+    }
+    @media (max-width:980px){
+      .hero-grid{grid-template-columns:minmax(0,1fr)}
+      .niveis{grid-template-columns:minmax(0,1fr)}
+      .indicado-faixa{grid-template-columns:minmax(0,1fr);justify-items:center;text-align:center}
+      .precos{margin-inline:auto}
+      .preco em{margin-left:0}
+      .selo{order:-1}
+      .header-tag{display:none}
+      /* Empilhado, o texto ocupa a largura toda: o véu deixa de ser lateral
+         e passa a cobrir por igual. */
+      .hero{background:linear-gradient(180deg,rgba(0,53,43,.9),rgba(0,63,51,.8)),url('public/background1.webp') center/cover no-repeat}
+    }
+    @media (max-width:620px){
+      .passos,.cursos{grid-template-columns:minmax(0,1fr)}
+      .header-cta .btn{padding:.5rem .75rem;font-size:.66rem}
+      .nivel-topo{flex-direction:column;align-items:flex-start;gap:.5rem}
+    }
+
+    /* Quem pediu menos movimento vê tudo parado e no lugar: nada de cair,
+       nada de faísca, e o selo já nasce no valor final. */
+    @media (prefers-reduced-motion:reduce){
+      html{scroll-behavior:auto}
+      *,*::before,*::after{animation:none!important;transition:none!important}
+      .nivel{opacity:1}
+    }
+  </style>
+
+  <!-- Sem JavaScript não há quem dispare a queda: os cards apareceriam
+       invisíveis. Aqui eles nascem prontos, no lugar. -->
+  <noscript><style>.nivel{opacity:1}</style></noscript>
+</head>
+
+<body>
+
+  <!-- Google Tag Manager (noscript) -->
+  <noscript><iframe src="https://sgtm.cppem.com.br/metrics/ns.html" height="0" width="0" style="display:none;visibility:hidden"></iframe></noscript>
+
+  <header class="site-header">
+    <div class="container site-header-inner">
+      <img src="public/logo-unicive.png" alt="UniCive" width="110" height="34" />
+      <span class="header-tag">Missão Indicação</span>
+      <div class="header-cta">
+        <a class="btn btn--amber" href="#indicar">Indicar agora</a>
+      </div>
+    </div>
+  </header>
+
+  <main>
+
+    <!-- ============ HERO + FORMULÁRIO ============ -->
+    <section class="hero" id="indicar">
+
+      <div class="container hero-grid">
+
+        <div class="hero-copy">
+          <p class="eyebrow">Programa de indicação · UniCive Caruaru</p>
+          <h1>Tira seu amigo do nível médio.<br /><span class="amber">E recebe no Pix.</span></h1>
+          <p class="lead">
+            Você já viu sair edital que ele queria e não podia nem se inscrever,
+            porque pedia nível superior. A UniCive resolve isso com matrícula de
+            R$ 99,90. E cada matrícula confirmada que vier de você cai na sua
+            chave Pix.
+          </p>
+
+          <div class="hero-proof">
+            <span class="chip">
+              <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M12 2v20"/><path d="M17 5H9.5a3.5 3.5 0 0 0 0 7h5a3.5 3.5 0 0 1 0 7H6"/></svg>
+              R$ 50, R$ 100 ou R$ 150
+            </span>
+            <span class="chip">
+              <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M20 12v10H4V12"/><path d="M2 7h20v5H2z"/><path d="M12 22V7"/><path d="M12 7H7.5a2.5 2.5 0 0 1 0-5C11 2 12 7 12 7Z"/><path d="M12 7h4.5a2.5 2.5 0 0 0 0-5C13 2 12 7 12 7Z"/></svg>
+              Matrícula por R$ 99,90 para ele
+            </span>
+            <span class="chip">
+              <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M12 4 2 8.6l10 4.6 10-4.6L12 4Z"/><path d="M6 10.9V16c0 1.9 2.7 3.4 6 3.4s6-1.5 6-3.4v-5.1"/></svg>
+              Graduação EAD reconhecida pelo MEC
+            </span>
+          </div>
+
+          <a class="hero-link" href="#niveis">
+            Ver quanto vale cada indicação
+            <svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.6" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M12 5v14"/><path d="m19 12-7 7-7-7"/></svg>
+          </a>
+        </div>
+
+        <div class="form-card" id="cartao-form">
+
+          <div class="form-conteudo">
+            <div class="form-titulo">
+              <strong>Faça sua indicação</strong>
+              <span>Leva menos de um minuto. Quer indicar mais de uma pessoa? Dá para repetir sem redigitar seus dados.</span>
+            </div>
+
+            <form id="form-indicacao" novalidate>
+
+              <fieldset>
+                <legend><b>1</b> Seus dados</legend>
+
+                <div class="campo">
+                  <label for="ind_nome">Seu nome completo</label>
+                  <input type="text" id="ind_nome" name="ind_nome" autocomplete="name" placeholder="Como está no seu documento" />
+                  <span class="erro" data-erro-de="ind_nome"></span>
+                </div>
+
+                <div class="campo">
+                  <label for="ind_telefone">Seu WhatsApp</label>
+                  <input type="tel" id="ind_telefone" name="ind_telefone" inputmode="numeric" autocomplete="tel" placeholder="(81) 90000-0000" maxlength="16" />
+                  <span class="erro" data-erro-de="ind_telefone"></span>
+                </div>
+
+                <div class="campo" id="campo-pix">
+                  <label for="ind_pix">Sua chave Pix</label>
+                  <input type="text" id="ind_pix" name="ind_pix" autocomplete="off" placeholder="CPF, telefone, e-mail ou chave aleatória" />
+                  <span class="ajuda">É para esta chave que o prêmio é pago quando a matrícula for confirmada.</span>
+                  <span class="pix-tipo" id="pix-tipo"></span>
+                  <span class="erro" data-erro-de="ind_pix"></span>
+                </div>
+              </fieldset>
+
+              <fieldset>
+                <legend><b>2</b> Quem você está indicando</legend>
+
+                <div class="campo">
+                  <label for="ind_nome_indicado">Nome de quem você indica</label>
+                  <input type="text" id="ind_nome_indicado" name="ind_nome_indicado" autocomplete="off" placeholder="Nome e sobrenome" />
+                  <span class="erro" data-erro-de="ind_nome_indicado"></span>
+                </div>
+
+                <div class="campo">
+                  <label for="ind_telefone_indicado">WhatsApp de quem você indica</label>
+                  <input type="tel" id="ind_telefone_indicado" name="ind_telefone_indicado" inputmode="numeric" autocomplete="off" placeholder="(81) 90000-0000" maxlength="16" />
+                  <span class="ajuda">É por aqui que nosso time vai falar com a pessoa.</span>
+                  <span class="erro" data-erro-de="ind_telefone_indicado"></span>
+                </div>
+              </fieldset>
+
+              <div class="form-rodape">
+                <button type="submit" class="btn btn--amber" id="ind_enviar">Enviar indicação</button>
+                <p class="form-aviso">Ao enviar, você autoriza a UniCive a entrar em contato com a pessoa indicada.</p>
+              </div>
+
+            </form>
+          </div>
+
+          <div class="sucesso" id="sucesso" role="status" aria-live="polite">
+            <div class="sucesso-icone" aria-hidden="true">
+              <svg width="28" height="28" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.6" stroke-linecap="round" stroke-linejoin="round"><polyline points="20 6 9 17 4 12"/></svg>
+            </div>
+            <h3>Indicação registrada</h3>
+            <p id="sucesso-texto">
+              Recebemos. Nosso time já vai falar com a pessoa. Quando a matrícula
+              for confirmada, essa indicação entra no seu placar e o Pix é feito.
+            </p>
+
+            <span class="sucesso-placar" id="sucesso-placar" hidden></span>
+
+            <div class="sucesso-acoes">
+              <button type="button" class="btn btn--amber" id="ind_outra">Indicar outra pessoa</button>
+              <a class="btn btn--whats" id="ind_whats" href="#" target="_blank" rel="noopener">
+                <svg width="18" height="18" viewBox="0 0 24 24" fill="currentColor" aria-hidden="true"><path d="M12.04 2c-5.46 0-9.9 4.44-9.9 9.9 0 1.75.46 3.45 1.32 4.95L2 22l5.3-1.39a9.86 9.86 0 0 0 4.74 1.21h.01c5.46 0 9.9-4.44 9.9-9.9 0-2.64-1.03-5.13-2.9-7A9.82 9.82 0 0 0 12.04 2Zm0 18.05h-.01a8.2 8.2 0 0 1-4.18-1.15l-.3-.18-3.11.82.83-3.04-.2-.31a8.18 8.18 0 0 1-1.26-4.39c0-4.54 3.7-8.23 8.24-8.23 2.2 0 4.27.86 5.82 2.42a8.18 8.18 0 0 1 2.41 5.82c0 4.54-3.7 8.24-8.24 8.24Zm4.52-6.17c-.25-.13-1.47-.72-1.69-.81-.23-.08-.39-.12-.56.13-.16.25-.64.8-.79.97-.14.16-.29.19-.54.06-.25-.12-1.05-.38-1.99-1.23-.74-.65-1.23-1.46-1.38-1.71-.14-.25-.01-.38.11-.51.11-.11.25-.29.37-.43.13-.15.17-.25.25-.41.08-.17.04-.31-.02-.44-.06-.12-.56-1.34-.76-1.84-.2-.48-.41-.42-.56-.43h-.48c-.17 0-.44.06-.67.31-.23.25-.87.85-.87 2.07 0 1.22.89 2.4 1.02 2.56.12.17 1.75 2.67 4.23 3.74.59.26 1.05.41 1.41.52.59.19 1.13.16 1.56.1.47-.07 1.47-.6 1.67-1.18.21-.58.21-1.07.15-1.18-.06-.1-.23-.16-.48-.29Z"/></svg>
+                Falar com a UniCive
+              </a>
+            </div>
+          </div>
+
+        </div>
+      </div>
+    </section>
+
+    <!-- ============ COMO PARTICIPAR ============ -->
+    <section class="section section-alt" id="como-funciona">
+      <div class="container">
+        <p class="eyebrow">Como participar</p>
+        <h2 class="section-title">Quatro passos, <span class="amber">do envio ao Pix</span></h2>
+
+        <ol class="passos">
+          <li class="passo">
+            <span class="passo-num">1</span>
+            <div>
+              <strong>Você indica</strong>
+              <p>Manda o nome e o WhatsApp de quem você quer indicar, junto com a sua chave Pix.</p>
+            </div>
+          </li>
+          <li class="passo">
+            <span class="passo-num">2</span>
+            <div>
+              <strong>A gente confere</strong>
+              <p>A equipe verifica se a pessoa indicada é elegível para o programa.</p>
+            </div>
+          </li>
+          <li class="passo">
+            <span class="passo-num">3</span>
+            <div>
+              <strong>Atendimento e matrícula</strong>
+              <p>Nosso time fala com ela, apresenta os cursos e faz a matrícula.</p>
+            </div>
+          </li>
+          <li class="passo">
+            <span class="passo-num">4</span>
+            <div>
+              <strong>Cai no seu Pix</strong>
+              <p>Matrícula confirmada, você entra no placar e o financeiro faz o pagamento.</p>
+            </div>
+          </li>
+        </ol>
+      </div>
+    </section>
+
+    <!-- ============ NÍVEIS ============ -->
+    <section class="section" id="niveis">
+      <div class="container">
+        <p class="eyebrow">Missão Indicação</p>
+        <h2 class="section-title">Quanto vale <span class="amber">cada indicação</span></h2>
+        <p class="section-copy">
+          Só entra no placar matrícula confirmada. A premiação é pela quantidade
+          de matrículas: a 1ª, a 2ª e a 3ª têm valores diferentes.
+        </p>
+
+        <div class="niveis">
+          <article class="nivel" style="--cor:var(--bronze);--atraso:0s">
+            <div class="nivel-topo">
+              <span class="nivel-nome">Bronze</span>
+              <span class="nivel-meta">1ª matrícula confirmada</span>
+            </div>
+            <div class="nivel-valor">R$ 50,00<small>Pago na sua chave Pix</small></div>
+          </article>
+
+          <article class="nivel" style="--cor:var(--prata);--atraso:.16s">
+            <div class="nivel-topo">
+              <span class="nivel-nome">Prata</span>
+              <span class="nivel-meta">2ª matrícula confirmada</span>
+            </div>
+            <div class="nivel-valor">R$ 100,00<small>Pago na sua chave Pix</small></div>
+          </article>
+
+          <article class="nivel" style="--cor:var(--ouro);--atraso:.32s">
+            <div class="nivel-topo">
+              <span class="nivel-nome">Ouro</span>
+              <span class="nivel-meta">3ª matrícula confirmada</span>
+            </div>
+            <div class="nivel-valor">R$ 150,00<small>Pago na sua chave Pix</small></div>
+          </article>
+        </div>
+
+        <div class="indicado-faixa">
+          <div>
+            <small>E para quem você indicar</small>
+            <strong class="titulo">Ele entra pagando quase nada</strong>
+
+            <div class="precos">
+              <div class="preco">
+                <b>Matrícula</b>
+                <s>R$ 250,00</s>
+                <i>R$ 99,90</i>
+                <em>60% OFF</em>
+              </div>
+              <div class="preco">
+                <b>Mensalidade</b>
+                <s>R$ 649,90</s>
+                <i>R$ 149,90</i>
+                <em>73% OFF</em>
+              </div>
+            </div>
+          </div>
+
+          <div class="selo" id="selo-desconto" style="--p:0" role="img" aria-label="60% de desconto na matrícula">
+            <span class="selo-num" id="selo-valor" aria-hidden="true">1%</span>
+            <span class="selo-off" aria-hidden="true">na matrícula</span>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- ============ O QUE VOCÊ ESTÁ INDICANDO ============ -->
+    <section class="section section-alt" id="a-faculdade">
+      <div class="container">
+        <p class="eyebrow">O que você está indicando</p>
+        <h2 class="section-title">A graduação EAD <span class="amber">do concurseiro</span></h2>
+        <p class="section-copy">
+          Graduações reconhecidas pelo MEC, montadas para quem quer assumir um
+          concurso de nível superior sem largar o emprego nem sair da cidade.
+          Quem você indicar escolhe entre estes cursos:
+        </p>
+
+        <div class="cursos">
+          <span class="curso"><svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><polyline points="20 6 9 17 4 12"/></svg>Serviços Jurídicos</span>
+          <span class="curso"><svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><polyline points="20 6 9 17 4 12"/></svg>Gestão da Atividade Policial</span>
+          <span class="curso"><svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><polyline points="20 6 9 17 4 12"/></svg>Criminologia</span>
+          <span class="curso"><svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><polyline points="20 6 9 17 4 12"/></svg>Segurança Privada</span>
+          <span class="curso"><svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><polyline points="20 6 9 17 4 12"/></svg>Recursos Humanos</span>
+          <span class="curso"><svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><polyline points="20 6 9 17 4 12"/></svg>Logística</span>
+          <span class="curso"><svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><polyline points="20 6 9 17 4 12"/></svg>Marketing</span>
+          <span class="curso"><svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><polyline points="20 6 9 17 4 12"/></svg>Marketing Digital</span>
+        </div>
+
+        <!-- Fotos vindas do captura-unicive, já em webp (34 KB as três).
+             Copiadas para cá em vez de referenciadas do outro deploy: a
+             página não pode quebrar se aquele projeto mudar de rota. -->
+        <div role="img" aria-label="Formandos da UniCive no dia da colação de grau">
+        <div class="carrossel" style="--duracao:50s">
+          <div class="carrossel-fita">
+            <ul class="carrossel-grupo">
+              <li><figure><img src="public/formados/formando1.webp" alt="" width="480" height="640" loading="lazy" decoding="async" /></figure></li>
+              <li><figure><img src="public/formados/formando2.webp" alt="" width="480" height="640" loading="lazy" decoding="async" /></figure></li>
+              <li><figure><img src="public/formados/formando3.webp" alt="" width="480" height="640" loading="lazy" decoding="async" /></figure></li>
+              <li><figure><img src="public/formados/formando4.webp" alt="" width="480" height="640" loading="lazy" decoding="async" /></figure></li>
+              <li><figure><img src="public/formados/formando5.webp" alt="" width="480" height="640" loading="lazy" decoding="async" /></figure></li>
+              <li><figure><img src="public/formados/formando6.webp" alt="" width="480" height="640" loading="lazy" decoding="async" /></figure></li>
+              <li><figure><img src="public/formados/formando7.webp" alt="" width="480" height="640" loading="lazy" decoding="async" /></figure></li>
+              <li><figure><img src="public/formados/formando8.webp" alt="" width="480" height="640" loading="lazy" decoding="async" /></figure></li>
+              <li><figure><img src="public/formados/formando9.webp" alt="" width="480" height="640" loading="lazy" decoding="async" /></figure></li>
+              <li><figure><img src="public/formados/formando10.webp" alt="" width="480" height="640" loading="lazy" decoding="async" /></figure></li>
+              <li><figure><img src="public/formados/formando11.webp" alt="" width="480" height="640" loading="lazy" decoding="async" /></figure></li>
+            </ul>
+            <ul class="carrossel-grupo" aria-hidden="true">
+              <li><figure><img src="public/formados/formando1.webp" alt="" width="480" height="640" loading="lazy" decoding="async" /></figure></li>
+              <li><figure><img src="public/formados/formando2.webp" alt="" width="480" height="640" loading="lazy" decoding="async" /></figure></li>
+              <li><figure><img src="public/formados/formando3.webp" alt="" width="480" height="640" loading="lazy" decoding="async" /></figure></li>
+              <li><figure><img src="public/formados/formando4.webp" alt="" width="480" height="640" loading="lazy" decoding="async" /></figure></li>
+              <li><figure><img src="public/formados/formando5.webp" alt="" width="480" height="640" loading="lazy" decoding="async" /></figure></li>
+              <li><figure><img src="public/formados/formando6.webp" alt="" width="480" height="640" loading="lazy" decoding="async" /></figure></li>
+              <li><figure><img src="public/formados/formando7.webp" alt="" width="480" height="640" loading="lazy" decoding="async" /></figure></li>
+              <li><figure><img src="public/formados/formando8.webp" alt="" width="480" height="640" loading="lazy" decoding="async" /></figure></li>
+              <li><figure><img src="public/formados/formando9.webp" alt="" width="480" height="640" loading="lazy" decoding="async" /></figure></li>
+              <li><figure><img src="public/formados/formando10.webp" alt="" width="480" height="640" loading="lazy" decoding="async" /></figure></li>
+              <li><figure><img src="public/formados/formando11.webp" alt="" width="480" height="640" loading="lazy" decoding="async" /></figure></li>
+            </ul>
+          </div>
+        </div>
+        </div>
+
+        <div class="cursos-rodape">
+          <p>
+            <b>Quem termina sai com diploma de nível superior na mão.</b>
+            É o que destrava concurso, promoção e vaga que hoje ele nem pode
+            disputar.
+          </p>
+          <a class="btn btn--amber" href="#indicar">Fazer minha indicação</a>
+        </div>
+      </div>
+    </section>
+
+    <!-- ============ REGRAS ============ -->
+    <section class="section">
+      <div class="container">
+        <p class="eyebrow">Regras</p>
+        <h2 class="section-title">O que você precisa <span class="amber">saber antes</span></h2>
+
+        <div class="regras">
+          <div class="regra">
+            <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M9 11l3 3L22 4"/><path d="M21 12v7a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2V5a2 2 0 0 1 2-2h11"/></svg>
+            <div>
+              <strong>Só conta matrícula confirmada</strong>
+              <p>A indicação entra no placar depois que a pessoa efetivamente se matricula.</p>
+            </div>
+          </div>
+
+          <div class="regra">
+            <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M12 2v20"/><path d="M17 5H9.5a3.5 3.5 0 0 0 0 7h5a3.5 3.5 0 0 1 0 7H6"/></svg>
+            <div>
+              <strong>Curso com matrícula acima de R$ 99</strong>
+              <p>A indicação vale quando a pessoa se matricula em um curso cuja matrícula passa de R$ 99.</p>
+            </div>
+          </div>
+
+          <div class="regra">
+            <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M18 6 6 18"/><path d="m6 6 12 12"/></svg>
+            <div>
+              <strong>Contato que já existe não vale</strong>
+              <p>Se a pessoa indicada já estiver em algum formulário, sistema, CRM ou WhatsApp nosso, a indicação não dá direito ao prêmio. É o que impede indicação falsa.</p>
+            </div>
+          </div>
+
+          <div class="regra">
+            <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M17 21v-2a4 4 0 0 0-4-4H5a4 4 0 0 0-4 4v2"/><circle cx="9" cy="7" r="4"/><path d="M22 21v-2a4 4 0 0 0-3-3.87"/></svg>
+            <div>
+              <strong>A conferência é feita pelo time</strong>
+              <p>Um coordenador ou liderança (Tecnologia, CRM ou Vendas) confere a indicação nos nossos sistemas antes de liberar o pagamento.</p>
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+  </main>
+
+  <footer class="site-footer">
+    <div class="container site-footer-inner">
+      <img src="public/logo-unicive.png" alt="UniCive" width="98" height="30" />
+      <p>
+        Missão Indicação, o programa de indicação da UniCive Caruaru.<br />
+        Dúvidas? <a id="rodape-whats" href="#" target="_blank" rel="noopener">Fale com a gente no WhatsApp</a>.
+      </p>
+    </div>
+  </footer>
+
+  <script src="script.js" defer></script>
+</body>
+</html>

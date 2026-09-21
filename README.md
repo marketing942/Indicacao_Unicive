@@ -36,13 +36,21 @@ Pix na coluna D.
 
 Site estático. Na Vercel, importar o repositório e publicar sem build.
 
-Domínio previsto, já reconhecido pelo backend caso o `?aba=` se perca num link
-compartilhado: `indique.unicive.cppem.com.br`.
+Domínio no ar: **`indica.unicive.cppem.com.br`**, projeto Vercel
+`indicacao-unicive`, conectado ao repositório (um `git push` publica sozinho).
 
-> Esse domínio tem uma história. A regra `/unicive/i` da lista `CAMPANHAS` casa
-> com o endereço inteiro, e antes ela atropelava a dedução por domínio: uma
-> indicação da UniCive sem `?aba=` ia parar na aba `UNICIVE_Novo`, contada como
-> lead de captura. Corrigido no backend em 21/09/2026.
+> **Este domínio é o mais sensível dos três.** A regra `/unicive/i` da lista
+> `CAMPANHAS` casa com o endereço inteiro. Sem uma regra de `DOMINIOS` que o
+> reconheça primeiro, uma indicação que chegue sem `?aba=` é lida como
+> campanha da UniCive e cai na aba `UNICIVE_Novo`, contada como lead de
+> captura. Silenciosamente, na aba errada.
+>
+> Isso precisou de duas correções: em `resolverOrigem`, que deixou de procurar
+> a campanha dentro da URL quando o domínio já foi reconhecido, e na própria
+> lista `DOMINIOS`, atualizada de `indique.` para `indica.` quando o domínio
+> real entrou no ar.
+>
+> **Se o domínio mudar de novo, a regra em `DOMINIOS` tem que mudar junto.**
 
 ---
 

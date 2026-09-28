@@ -65,7 +65,6 @@ const BU = {
   nome: "UNICIVE",              // vai junto nos eventos de dataLayer
   whatsapp: "5581992640766",
   whatsappMsg: "...",
-  pedirChavePix: true,          // aqui o prêmio é pago em dinheiro
   selo: { ate: 60, prefixo: "", sufixo: "%" }
 };
 ```
@@ -74,7 +73,7 @@ const BU = {
 |---|---|---|---|
 | `chave` | `INDICACAO_UNICIVE` | `INDICACAO_CPPEM` | `INDICACAO_COLEGIO` |
 | WhatsApp | `5581992640766` | `5581973105354` | `5581997076388` |
-| `pedirChavePix` | `true` | `true` | `false` |
+| pede a chave Pix | **sim, só aqui** | não | não |
 | `selo` | 60% | 10% | R$ 100 |
 
 O selo mostra os **60% da matrícula**, que é a oferta de entrada. Os 73% da
